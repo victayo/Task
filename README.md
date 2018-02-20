@@ -1,2 +1,2 @@
 # Task
-A task manager
+A simple task manager
