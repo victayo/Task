@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Repositories\Task;
 
+use App\Models\Stage;
 use App\Models\Task;
 use App\Repositories\Task\TaskRepository;
 use Tests\TestCase;
@@ -20,6 +21,7 @@ class TaskRepositoryTest extends TestCase
     public function setUp(){
         parent::setUp();
         $this->taskRepo = new TaskRepository();
+        factory(Stage::class)->create();
     }
 
     public function testCanGetCompleted(){
