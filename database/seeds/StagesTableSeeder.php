@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Stage;
 use Illuminate\Database\Seeder;
 
 class StagesTableSeeder extends Seeder
@@ -11,6 +12,6 @@ class StagesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Stage::class, 5)->create();
     }
 }

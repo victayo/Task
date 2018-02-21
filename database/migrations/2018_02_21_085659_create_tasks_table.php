@@ -18,8 +18,14 @@ class CreateTasksTable extends Migration
             $table->string('identifier')->unique();
             $table->text('detail')->nullable();
             $table->date('start_date')->default(now()->toDateString());
+            $table->integer('stage_id')->unsigned();
             $table->date('end_date')->nullable();
             $table->date('completed')->nullable();
+
+//            $table->foreign('stage_id')
+//                ->references('id')
+//                ->on('stages')
+//                ->onDelete('cascade');
             $table->timestamps();
         });
     }
