@@ -93,28 +93,36 @@ class StageRepository implements StageRepositoryInterface
 
     /**
      * @param Stage $stage
+     * @return Collection all modified tasks
      */
     public function markAsCompleted(Stage $stage)
     {
        $tasks = $stage->tasks()->get();
-       $tasks->map(function($task){
+       $modified = $tasks->map(function($task){
            if(!$task->completed){
                $task->completed = now()->toDateString();
                $task->save();
+               return $task;
            }
        });
+        return $modified;
     }
 
     /**
      * @param Stage $stage
+     * @return Collection all modified tasks
      */
     public function markAsUncompleted(Stage $stage)
     {
         $tasks = $stage->tasks()->get();
-        $tasks->map(function($task){
+        $modified = $tasks->map(function($task){
+            if($task) {
                 $task->completed = null;
                 $task->save();
+                return $task;
+            }
         });
+        return $modified;
     }
 
     /**
@@ -124,7 +132,7 @@ class StageRepository implements StageRepositoryInterface
     public function getCompletedTasks(Stage $stage)
     {
         return $stage->tasks()
-            ->whereNotNull('tasks.completed')
+            ->whereNotNull('completed')
             ->get();
     }
 
@@ -135,7 +143,7 @@ class StageRepository implements StageRepositoryInterface
     public function getUncompletedTasks(Stage $stage)
     {
         return $stage->tasks()
-            ->whereNull('tasks.completed')
+            ->whereNull('completed')
             ->get();
     }
 

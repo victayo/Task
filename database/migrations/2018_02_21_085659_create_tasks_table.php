@@ -22,10 +22,10 @@ class CreateTasksTable extends Migration
             $table->date('end_date')->nullable();
             $table->date('completed')->nullable();
 
-            $table->foreign('stage_id')
-                ->references('id')
-                ->on('stages')
-                ->onDelete('cascade');
+//            $table->foreign('stage_id')
+//                ->references('id')
+//                ->on('stages')
+//                ->onDelete('cascade');
             $table->timestamps();
         });
     }
